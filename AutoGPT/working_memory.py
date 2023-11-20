@@ -1,15 +1,26 @@
+import deque
 class WorkingMemory:
-    def __init__(self, memory_size):
-        self.tasks = memory_size
-        self.memory = []
+    def __init__(self):
+        self.tasks = deque()
+        self.thoughts = deque()
 
-    def add(self, item):
-        self.memory.append(item)
-        if len(self.memory) > self.memory_size:
-            self.memory.pop(0)
-
-    def get(self):
-        return self.memory
+    def add_thought(self, thought):
+        self.thoughts.append(thought)
 
     def clear(self):
         self.memory = []
+
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def reorder_tasks_based_on_importance(self):
+        #call the llm to get the importance of each task, then reorder the tasks based on it and on the thoughts.
+        pass
+
+    def get_next_task(self):
+        return self.tasks.popleft()
+
+    def generate_thought_based_on_tasks(self):
+        #call the llm to generate a thought based on the tasks
+        pass
+
