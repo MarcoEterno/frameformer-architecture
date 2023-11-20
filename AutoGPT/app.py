@@ -24,3 +24,9 @@ if model_response:
 
 process_is_running = True
 while (process_is_running):
+    # 1) fetch user input
+    user_input = st.text_input("Prompt", "Solve world hunger")
+
+    # 2) update the state of the system based on the user input, and execute next task
+
+    # 3) return output to screen if user input is required

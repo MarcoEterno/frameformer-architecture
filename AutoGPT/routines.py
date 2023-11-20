@@ -16,9 +16,9 @@ def context_memory_management():
 
 
 
-def determine_whether_user_input_is_required():
+def determine_next_question_to_user():
     """
-    determine whether user input is required and returns a boolean
+    determine whether user input is required and returns the question to user
     """
     pass
 
