@@ -12,15 +12,15 @@ os.environ["OPENAI_API_KEY"] = apikey
 
 # App framework
 st.title("AutoGPT")
-prompt = st.text_input("Prompt", "Hello, I am a robot.")
+user_prompt = st.text_input("Prompt", "Hello, I am a robot.")
 
 # LLMs
-llm = OpenAI(temperature=0.9, model = "gpt-3.5-turbo-instruct")
+default_llm = OpenAI(temperature=0.9, model = "gpt-3.5-turbo-instruct")
 
 
 # return output to screen
-if prompt:
-    response = llm(prompt=prompt)
+if user_prompt:
+    response = default_llm(prompt=user_prompt)
     st.write(response)
 
 
