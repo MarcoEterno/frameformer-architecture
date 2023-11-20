@@ -8,6 +8,7 @@ import streamlit as st
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
+import routines
 
 os.environ["OPENAI_API_KEY"] = apikey
 default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
@@ -24,3 +25,5 @@ if model_response:
 
 process_is_running = True
 while (process_is_running):
+    context_memory_management()
+    process_is_running = False
