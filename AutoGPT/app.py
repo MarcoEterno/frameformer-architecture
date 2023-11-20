@@ -14,13 +14,14 @@ default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
 
 # App framework
 st.title("AutoGPT")
-user_prompt = st.text_input("Prompt", "Hello, I am a robot.")
-
-model_response = default_llm(prompt=user_prompt)
-
-# return output to screen
-if model_response:
-    st.write(model_response)
 
 process_is_running = True
 while (process_is_running):
+    #1) get user input if present
+    user_prompt = st.text_input("Prompt", "solve world hunger")
+
+   #updating the internal state of the system, and generating output for the user when needed.
+
+    model_response = default_llm(prompt=user_prompt)
+    st.write(model_response)
+

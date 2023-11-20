@@ -16,8 +16,8 @@ Different types and architectures of memory are implemented.
 ### Architectures
 The 3 different **architectures** of memory used are:
 1. Text based memory
-2. Vector databases
-3. Knowledge graphs
+2. Vector database
+3. Knowledge graph
 
 ### Memory types
 The different types of memory used are:
