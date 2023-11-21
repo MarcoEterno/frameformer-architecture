@@ -1,4 +1,17 @@
+from apikey import API_KEY as apikey
+from utils import count_calls
+
 from collections import deque
+import os
+from langchain.llms import OpenAI
+
+os.environ["OPENAI_API_KEY"] = apikey
+
+@count_calls
+def openAI_count_calls(*args,**kwargs):
+    return OpenAI(*args,**kwargs)
+
+default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
 
 
 class WorkingMemory:
@@ -10,8 +23,10 @@ class WorkingMemory:
     def add_thought(self, thought):
         self.thoughts.append(thought)
 
-    def clear(self):
-        self.memory = []
+    def extract_relevant_thoughts(self):
+        # call the llm to extract the relevant thoughts
+        default_llm(prompt="abc")
+
 
     def add_task(self, task):
         self.tasks.append(task)

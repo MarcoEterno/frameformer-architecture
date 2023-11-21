@@ -47,5 +47,6 @@ So these routines are useful:
 2. **fulfill**: tries to fulfill a task, and if it can't, decomposes it into subtasks.
 3. **evaluate_strategies** lists the strategies to fulfill a task, and adds them to the working memory 
    with a score, which is related to the probability that the strategy will work.
+4. 
 
 

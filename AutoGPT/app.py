@@ -1,6 +1,7 @@
 import osfrom apikey import API_KEY as apikey
 from routines import * #to substitute with specific routines we are using
 from prompts import QA_format
+from utils import count_calls
 
 import os
 import streamlit as st
@@ -9,7 +10,12 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
 
 os.environ["OPENAI_API_KEY"] = apikey
-default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
+
+@count_calls
+def OpenAI_count_calls(*args,**kwargs):
+    return OpenAI(*args,**kwargs)
+
+default_llm = OpenAI_count_calls(temperature=0.9, model="gpt-3.5-turbo-instruct")
 
 # App framework
 st.title("AutoGPT")
