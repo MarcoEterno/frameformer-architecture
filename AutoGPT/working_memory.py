@@ -8,10 +8,10 @@ from langchain.llms import OpenAI
 os.environ["OPENAI_API_KEY"] = apikey
 
 @count_calls
-def openAI_count_calls(*args,**kwargs):
+def OpenAI_count_calls(*args,**kwargs):
     return OpenAI(*args,**kwargs)
 
-default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
+default_llm = OpenAI_count_calls(temperature=0.9, model="gpt-3.5-turbo-instruct")
 
 
 class WorkingMemory:
@@ -41,5 +41,3 @@ class WorkingMemory:
     def generate_thought_based_on_tasks(self):
         # call the llm to generate a thought based on the tasks
         pass
-
-    def
