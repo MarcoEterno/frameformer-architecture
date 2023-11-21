@@ -30,6 +30,10 @@ The different types of memory used are:
 the relevant informations about those tasks, and the current thoughts of the AI.
 Tasks and thoughts are implemented using JSON objects.
 
+## History of the agent
+
+1. The agent is initialized with a mission, a and a working memory.
+
 
 
 

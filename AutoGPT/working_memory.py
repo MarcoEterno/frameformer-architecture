@@ -26,3 +26,5 @@ class WorkingMemory:
     def generate_thought_based_on_tasks(self):
         # call the llm to generate a thought based on the tasks
         pass
+
+    def
