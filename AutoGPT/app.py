@@ -1,8 +1,8 @@
-import os
-from apikey import API_KEY as apikey
+import osfrom apikey import API_KEY as apikey
 from routines import * #to substitute with specific routines we are using
 from prompts import QA_format
 
+import os
 import streamlit as st
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate

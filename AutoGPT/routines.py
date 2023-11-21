@@ -2,13 +2,13 @@ from langchain.schema import AIMessage
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 import nltk
+import os
 
 # Download the punkt tokenizer (if not already downloaded)
 nltk.download('punkt')
 
 
 def count_tokens(file_path):
-    # rewriting the same routine using the try function
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
             text = file.read()
@@ -16,8 +16,7 @@ def count_tokens(file_path):
             file.close()
             return len(tokens)
     except:
-        print("Error: file not found")
-        return 0
+        raise Exception("Error: file not found")
 
 
 """
@@ -25,12 +24,13 @@ in context memory management that uses RAG from the worldview + summarization to
 """
 
 
-# mission,process,worldview,task,useful_infos='', context_lenght=8000
-def summarization_of_relevant_info(task, world_model, default_llm, context_lenght=8000):
+
+def summarization_of_infos_relevant_to_task(task, world_model, default_llm, context_lenght=8000):
     """Summarizes useful info"""
 
     """First step: counting the context length"""
-    file_path = 'world_model.txt'  # Change this to the path of your text file /NOT A PATH
+    file_name = 'world_model.txt'
+    file_path = os.path.join(os.getcwd(),file_name)
     num_tokens = count_tokens(file_path)
 
     print(f'Number of tokens in {file_path}: {num_tokens}')  # then comment this line
@@ -49,17 +49,17 @@ def summarization_of_relevant_info(task, world_model, default_llm, context_lengh
     num_summarizations_done = 1
     while count_tokens(summarization) > context_lenght and num_summarizations_done < 3:
         # first argue that the summarization is too long, we define a string, and pass it to the function.
-        summarization_of_relevant_info(task + "Also: YOU HAVE ALREADY SUMMARIZED THE INFO: BUT IT WAS TOO LONG: " + \
-                                       count_tokens(
+        summarization_of_infos_relevant_to_task(task + "Also: YOU HAVE ALREADY SUMMARIZED THE INFO: BUT IT WAS TOO LONG: " + \
+                                                count_tokens(
                                            summarization) + " INSTEAD OF THE CONTEXT LENGTH " + context_lenght + "TRY TO SUMMARIZE IT IN LESS TOKENS!", \
-                                       world_model, default_llm)
+                                                world_model, default_llm)
         num_summarizations_done += 1
 
     return summarization
 
 
-def determine_whether_user_input_is_required():
+def determine_possible_question_to_user():
     """
-    determine whether user input is required and returns a boolean
+    determine whether user input is required and returns the question.
     """
     pass

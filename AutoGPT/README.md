@@ -32,7 +32,12 @@ Tasks and thoughts are implemented using JSON objects.
 
 ## History of the agent
 
-1. The agent is initialized with a mission, a and a working memory.
+1. The agent is initialized with a mission, and should try to fulfill it. 
+2. The agent should first try to decompose the mission into subtasks, 
+   and then try to fulfill those subtasks.
+3. while doing that, the agent can further decompose the subtasks into 
+   sub-subtasks, and each time it discover something about the world it writes
+   it on the world model
 
 
 
