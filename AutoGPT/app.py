@@ -1,7 +1,9 @@
-import osfrom apikey import API_KEY as apikey
-from routines import * #to substitute with specific routines we are using
+import os
+from apikey import API_KEY as apikey
+from routines import *  # to substitute with specific routines we are using
 from prompts import QA_format
 from utils import count_calls
+from working_memory import WorkingMemory
 
 import os
 import streamlit as st
@@ -11,15 +13,25 @@ from langchain.chains import LLMChain, SequentialChain
 
 os.environ["OPENAI_API_KEY"] = apikey
 
+
 @count_calls
-def OpenAI_count_calls(*args,**kwargs):
-    return OpenAI(*args,**kwargs)
+def OpenAI_count_calls(*args, **kwargs):
+    return OpenAI(*args, **kwargs)
+
 
 default_llm = OpenAI_count_calls(temperature=0.9, model="gpt-3.5-turbo-instruct")
 
 # App framework
 st.title("AutoGPT")
 
+# initialize the components
+working_memory = WorkingMemory()
+
+# generate first task list
+
+# generate first thought
+
+# organize
 
 
 process_is_running = True
@@ -38,7 +50,23 @@ while (process_is_running):
     st.write(model_output)
 
     # 4) stp the execution when there are no tasks left
-    if(True):
+    if (working_memory.tasks == []):
         process_is_running = False
 
+"""
+Let's recap the main steps of the process:
+1) AGI awakens, and starts to decompose the mission in tasks
+2) AGI prioritises the tasks based on temporal dependency (some tasks require input from other tasks)
+3) AGI execute single tasks using this strategy:
+    a) AGI asks itself if the task needs further decomposition(if it does, decomposes the task in subtasks)
+    b) AGI asks itself if the task needs further information from the user (if it does, asks the user for the info)
+    c) every time AGI encounters a new fact, it challenges it, and if it is true it is added to world model.
+    d) when a solution to the task is proposed, AGI asks itself if the solution is correct (if it is, the task is marked
+     as completed)
+    e) the working memory will contain informations about all the open and closed tasks.
+4) AGI stops when there are no tasks left.
+5) Last step is to paste together the tasks and their answers in the context window, and ask AGI to print to user the 
+answer to the mission.
 
+
+"""
