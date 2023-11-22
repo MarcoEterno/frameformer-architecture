@@ -58,11 +58,25 @@ def summarize_infos_relevant_to_task(task, text_to_summarize, default_llm, conte
     while count_tokens_of_string(summarization) > context_length and num_summarizations_done < 3:
         # first argue that the summarization is too long, we define a string, and pass it to the function.
         summarize_infos_relevant_to_task(str(task) + "Also: YOU HAVE ALREADY SUMMARIZED THE INFO: BUT IT WAS TOO LONG: " + \
-                                                count_tokens_of_string(str(summarization)) + " INSTEAD OF THE CONTEXT LENGTH " + str(context_length) + \
+                                                str(count_tokens_of_string(str(summarization))) + " INSTEAD OF THE CONTEXT LENGTH " + str(context_length) + \
                                                 " NOW TRY TO SUMMARIZE IT IN LESS TOKENS!", text_to_summarize, default_llm, context_length)
         num_summarizations_done += 1
 
     return summarization
+
+def give_answer(task, relevant_text, default_llm, context_length = 8000):
+    """Uses the relevant info to give an answer to the task """
+
+    """First step: counting the context length"""
+    num_tokens = count_tokens_of_string(relevant_text)
+    
+    if num_tokens > context_length:
+        relevant_text = summarize_infos_relevant_to_task(task, relevant_text, default_llm, context_length)
+
+    """Second step: gives the answer required by the task after having read the task and the relevant text"""
+    prompt = "YOUR TASK IS: " + str(task) + " READ AND USE THE FOLLOWING RELEVANT INFORMATION TO SOLVE THE TASK. " + \
+             "BE BRIEF AND CONCISE: " + str(relevant_text)
+    return default_llm(prompt)
 
 
 def determine_possible_question_to_user():

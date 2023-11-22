@@ -1,11 +1,13 @@
 import unittest
 
 import os
-from apikey import API_KEY as apikey
+from AutoGPT.apikey import API_KEY as apikey
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain, SequentialChain
-from routines import summarize_infos_relevant_to_task
+from AutoGPT.routines import summarize_infos_relevant_to_task
+from AutoGPT.routines import give_answer
+
 
 def open_file_get_text(file_path):
     try:
@@ -26,9 +28,9 @@ class Test_summarization_of_infos_relevant_to_task(unittest.TestCase):
         default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
         
         task = "Which creatures and which men do Dante see in the wilds?"
-        divine_comedy_chapter_one = open_file_get_text("divine_comedy_chapter_one.txt")
-        answer = summarize_infos_relevant_to_task(task, divine_comedy_chapter_one, default_llm, 80)
-        print(answer)
+        divine_comedy_chapter_one = open_file_get_text("AutoGPT/test/divine_comedy_chapter_one.txt")
+        relevant_info = summarize_infos_relevant_to_task(task, divine_comedy_chapter_one, default_llm, 800)
+        answer = give_answer(task, relevant_info, default_llm, 8000)
 
         # Ask for user confirmation
         confirmation_result = ask_user_for_confirmation(answer)
