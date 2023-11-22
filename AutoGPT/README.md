@@ -31,52 +31,65 @@ the relevant informations about those tasks, and the current thoughts of the AI.
 Tasks and thoughts are implemented using JSON objects.
 
 ## Working memory
-The working memory of the agent contains the current set of tasks open, in progress and closed, 
-as well as the agent thought history.
+The working memory of the agent contains the current set of tasks open, 
+in progress and closed, as well as the agent thought history.
 
 ### Tasks
-each task is a JSON object, which contains the following fields:
-1. **id**: a unique identifier for the task, that progresses each time a task is created
+Each task is a JSON object, which contains the following fields:
+1. **id**: a unique identifier for the task, that progresses each time 
+   a task is created
 2. **name**: the name of the task
 3. **description**: a description of the task
 4. **status**: the status of the task, which can be: 
    1. **open**: the task is open, and can be executed
    2. **in_progress**: the task is in progress, and cannot be executed
    3. **closed**: the task is closed, and cannot be executed
-   4. **failed_with_current_available_instruments**: the task has failed, and cannot be executed
+   4. **failed_with_current_available_instruments**: the task has failed,
+   and cannot be executed
 5. **priority**: the priority of the task, which can be:
    1. **high**: the task has high priority
    2. **medium**: the task has medium priority
    3. **low**: the task has low priority
 6. **tasks_depending** on this task
 7. **tasks_required** in order to fulfill the task
-8. **tasks_and_thoughts_that_brought_to_it** still to decide if this is useful, may be can be done with timestamps, 
-   but we loose the ability to parallelize the tasks
-8. **stream_of_consciousness**: all the thoughts that the agent has had while executing the task organized in text
+8. **tasks_and_thoughts_that_brought_to_it** still to decide if this is
+   useful, 
+   may be can be done with timestamps, but we loose the ability to 
+   parallelize the tasks
+9. **stream_of_consciousness**: all the thoughts that the agent has had
+   while executing the task organized in text
 
 ### Thoughts
-each thought is a JSON object, which contains the following fields:
-1. **id**: a unique identifier for the thought, that progresses each time a thought is created
-2. **name**: the name of the thought, used to search for relevancy among all the thoughts
+Each thought is a JSON object, which contains the following fields:
+1. **id**: a unique identifier for the thought, that progresses each time 
+   a thought is created
+2. **name**: the name of the thought, used to search for relevancy among 
+   all the thoughts
 3. **content**: the thought itself in text format
 
 ## History of the agent
 Let's recap the main steps of the process:
-1) AGI awakens, and starts to decompose the mission in tasks
-2) AGI prioritises the tasks based on temporal dependency (some tasks require input from other tasks)
-   3) AGI execute single tasks using this strategy:\
-       a) AGI asks itself if the task needs further decomposition(if it does, decomposes the task in subtasks)\
-       b) AGI asks itself if the task needs further information from the user (if it does, asks the user for the info)\
-       c) AGI generates possible routes to solve the problem\
-       d) AGI does a depth-first search, prioritizing the routes most likely to fulfill the task,
-          A maximum depth is set, in order to avoid excessive decomposition.\
-       e) every time AGI encounters a new fact, it challenges it using the epistemological method (explained below) 
-   and if it is true it is added to world model.\
-       f) when a solution to the task is proposed, AGI asks itself if the solution is correct (if it is, the task is marked
-        as completed)\
-       g) the working memory will contain information about all the open and closed tasks.
-4) AGI stops when there are no tasks left.
-5) Last step is to paste together the tasks and their answers in the context window, and ask AGI to print to user the 
+1) The Agent awakens, and starts to decompose the mission in tasks
+2) The Agent prioritises the tasks based on temporal dependency (some tasks require
+   input from other tasks)
+3) The Agent execute single tasks using this strategy:\
+    a) The Agent asks itself if the task needs further decomposition(if it does,
+    decomposes the task in subtasks)\
+    b) The Agent asks itself if the task needs further information from the 
+    user (if it does, asks the user for the info)\
+    c) The Agent generates possible routes to solve the problem\
+    d) The Agent does a depth-first search, prioritizing the routes most likely to
+    fulfill the task. A maximum depth is set, in order to avoid 
+    excessive decomposition.\
+    e) every time the Agent encounters a new fact, it challenges it using 
+    the epistemological method (explained below) 
+and if it is true it is added to world model.\
+    f) when a solution to the task is proposed, the agent asks itself 
+    if the solution is correct (if it is, the task is marked as completed)\
+    g) the working memory will contain information about all the open and closed tasks.
+4) The agent stops when there are no tasks left.
+5) Last step is to paste together the tasks and their answers in the context
+   window, and ask the agent to print to user the 
 answer to the mission.
 
 ## The epistemological method
@@ -92,26 +105,44 @@ to evaluate a proposition A according to it we should:
 
 terminal, user, external knowledge base.
 
+## Completing a single task
+The agent will try to complete a single task using this strategy:
+1. **decompose**: understands if the task needs further decomposition, and if
+   it does, decomposes the task in subtasks and adds them to the working memory.
+2. **generate possible routes**: generates possible routes to solve the problem.
+3. **evaluate_strategies** lists the strategies to fulfill a task, and adds 
+   them to the working memory with a score, which is related to the probability 
+   that the strategy will work.
+4. **execute**: executes the strategy with the highest score, and if it fails,
+   executes the strategies with decreasing scores
+5. **evaluate_solution**: evaluates the solution proposed by the strategy, 
+   and if it is not convincing, the agent will redo the task in high 
+   resource mode (GPT4+more steps)
+6. **create_framework**: if even after the high resources mode the solution 
+   is still not convincing, the agent will create a new framework to solve the task.
+
 ## New Frameworks
 --when to create them and how to call them--
 After having solved a task, the agent evaluates the solution. 
-if the solution is convincing, the task can be marked as completed.
-if the solution is not convincing, the agent will redo the task in high resource mode (GPT4+more steps)
-if even after the high resources mode the solution is still not convincing, the agent will create a new framework
-to solve the task.
+If the solution is convincing, the task can be marked as completed.
+If the solution is not convincing, the agent will redo the task in high 
+resource mode (GPT4+more steps).
+If even after the high resources mode the solution is still not convincing,
+the agent will create a new framework to solve the task.
 
-Frameworks can contain two types of information:
-1. **natural language knowledge and instructions**: this is the information that the agent will use to solve the task.
-2. **programming code**: a code generated and executed by the agent, 
+Frameworks can contain three types of information:
+1. **natural language knowledge and instructions**: this is the information +
+   that the agent will pass to a LLM to solve the task next time.
+2. **programming code**: a code generated and executed by the agent. 
+   If the code contains a bug, the agent will try to fix it iterating on 
+   the errors displayed by compiler/interpreter. If the code contains free 
+   parameters, the agent will try to find the best parameters to solve the task, 
+   and write guidelines in order to do that in the future
 3. **external tool**: a tool that the agent will use to solve the task. 
    The agent will use the tool to solve the task, and will record the steps taken by the tool.
    The agent will then use the steps taken by the tool to create a new framework, 
    which will contain the instructions to use the tool to solve the task.
 
-## Completing a single task
-The agent will try to complete a single task using this strategy:
-1. **decompose**: decomposes a task into subtasks, and adds them to the working memory.
-2. 
 
 ## Self reflection and stream of consciousness
 è IMPORTANTE CHE L'AI ABBIA INFORMAZIONI SU SE STESSA E LE IMMETTA NELLE RICHIESTE API AL LANGUAGE MODEL
@@ -120,14 +151,5 @@ LA PROPRIA CONOSCENZA DEL MONDO.
 
 PER EVITARE CHE L'AI SI BLOCCHI E VADA IN LOOP, è OPPORTUNO CHE ESISTA UN MOOD CHE VIENE PASSATO ALLE CHIAMATE API.
 QUESTO MOOD è DETERMINATO DALLO STATO DELL'AI ED ANCHE DA UN NUMERO RANDOM CHE CAMBIA LENTAMENTE NEL TEMPO.
-
-
-
-So these routines are useful:
-1. **decompose**: decomposes a task into subtasks, and adds them to the working memory.
-2. **fulfill**: tries to fulfill a task, and if it can't, decomposes it into subtasks.
-3. **evaluate_strategies** lists the strategies to fulfill a task, and adds them to the working memory 
-   with a score, which is related to the probability that the strategy will work.
-4. 
 
 
