@@ -31,7 +31,7 @@ class Test_summarization_of_infos_relevant_to_task(unittest.TestCase):
         print(answer)
 
         # Ask for user confirmation
-        confirmation_result = ask_user_for_confirmation(result)
+        confirmation_result = ask_user_for_confirmation(answer)
 
         # Assert that the user confirmed the correct answer
         self.assertTrue(confirmation_result)
