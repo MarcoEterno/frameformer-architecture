@@ -70,11 +70,15 @@ Each thought is a JSON object, which contains the following fields:
    all the thoughts
 3. **content**: the thought itself in text format
 
-## Scheduler and resource management
+## Task scheduler and resource management
 It is possible that given the variable amount of effort that 
 can be put in a task, a sophisticated system is needed to decide whether 
 to use some resources to complete a task, or to use them to create a 
 new framework or not.
+
+WOULD BE NICE TO SET A BOOL VARIABLE USER_AWAY, IN ORDER TO 
+FORCE THE MODEL TO DO THINGHS ON HIS OWN.
+
 
 ## History of the agent
 Let's recap the main steps of the process:
@@ -102,21 +106,33 @@ Let's recap the main steps of the process:
 answer to the mission.
 
 ## The epistemological method
---EXPLAIN THE scientific method--
 While executing a task, the Agent will encounter new facts.
 The AI will challenge those facts using the epistemological method,
 which is a set of procedures the AI will use to challenge the facts.
 
 The base for the epistemological method is the scientific method. 
 to evaluate a proposition A according to it we should:
-1. **Derive predictions** from A, that should be falsifiable as 
+1. **Derive predictions** from A as a logical consequence, that should be falsifiable as 
    easily as possible, and are not already known to be false.
-2. **Test the prediction** by an experiment. 
-   If the experiment does not confirm the prediction, the hypothesis is falsified.
-The overall process involves making conjectures (hypotheses), deriving predictions from them as logical consequences, and then carrying out experiments based on those predictions to determine whether the original conjecture was correct.
+2. **Test the prediction** by an experiment when possible, and by pure 
+   self reflection if no other way is possible. If the prediction, 
+   is not confirmed the hypothesis is falsified.
+3. **Add it to the world model**: if all the predictions are not falsified, the hypothesis has survived the test, 
+   and we can add it to the world model.
+
+At test time, the Agent needs to choose which verification
+method is more appropriate for a given hypothesis
+The possible instrument to test the prediction are:
+1. **ask the external knowledge base**
+2. **execute a code and read the result**
+3. **ask the user**
+4. **self reflection**: the agent will try to find a counterexample to the 
+   prediction, and if it finds one, the prediction is falsified.
 
 
-terminal, user, external knowledge base.
+a subtle point is that using the scientific process, no hypothesis can be
+proven true, but only false. So every piece of the world model is 
+a hypothesis that has not been proven false yet.
 
 ## Completing a single task
 The agent will try to complete a single task using this strategy:
