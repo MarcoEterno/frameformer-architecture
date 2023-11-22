@@ -30,6 +30,35 @@ The different types of memory used are:
 the relevant informations about those tasks, and the current thoughts of the AI.
 Tasks and thoughts are implemented using JSON objects.
 
+## Working memory
+The working memory of the agent contains the current set of tasks open, in progress and closed, 
+as well as the agent thought history.
+
+### Tasks
+each task is a JSON object, which contains the following fields:
+1. **id**: a unique identifier for the task, that progresses each time a task is created
+2. **name**: the name of the task
+3. **description**: a description of the task
+4. **status**: the status of the task, which can be: 
+   1. **open**: the task is open, and can be executed
+   2. **in_progress**: the task is in progress, and cannot be executed
+   3. **closed**: the task is closed, and cannot be executed
+   4. **failed_with_current_available_instruments**: the task has failed, and cannot be executed
+5. **priority**: the priority of the task, which can be:
+   1. **high**: the task has high priority
+   2. **medium**: the task has medium priority
+   3. **low**: the task has low priority
+6. **tasks_depending** on this task
+7. **tasks_required** in order to fulfill the task
+8. **tasks_and_thoughts_that_brought_to_it** still to decide if this is useful, may be can be done with timestamps, 
+   but we loose the ability to parallelize the tasks
+8. **stream_of_consciousness**: all the thoughts that the agent has had while executing the task organized in text
+
+### Thoughts
+each thought is a JSON object, which contains the following fields:
+1. **id**: a unique identifier for the thought, that progresses each time a thought is created
+2. **name**: the name of the thought, used to search for relevancy among all the thoughts
+3. **content**: the thought itself in text format
 
 ## History of the agent
 Let's recap the main steps of the process:
@@ -65,6 +94,24 @@ terminal, user, external knowledge base.
 
 ## New Frameworks
 --when to create them and how to call them--
+After having solved a task, the agent evaluates the solution. 
+if the solution is convincing, the task can be marked as completed.
+if the solution is not convincing, the agent will redo the task in high resource mode (GPT4+more steps)
+if even after the high resources mode the solution is still not convincing, the agent will create a new framework
+to solve the task.
+
+Frameworks can contain two types of information:
+1. **natural language knowledge and instructions**: this is the information that the agent will use to solve the task.
+2. **programming code**: a code generated and executed by the agent, 
+3. **external tool**: a tool that the agent will use to solve the task. 
+   The agent will use the tool to solve the task, and will record the steps taken by the tool.
+   The agent will then use the steps taken by the tool to create a new framework, 
+   which will contain the instructions to use the tool to solve the task.
+
+## Completing a single task
+The agent will try to complete a single task using this strategy:
+1. **decompose**: decomposes a task into subtasks, and adds them to the working memory.
+2. 
 
 ## Self reflection and stream of consciousness
 è IMPORTANTE CHE L'AI ABBIA INFORMAZIONI SU SE STESSA E LE IMMETTA NELLE RICHIESTE API AL LANGUAGE MODEL
@@ -73,6 +120,7 @@ LA PROPRIA CONOSCENZA DEL MONDO.
 
 PER EVITARE CHE L'AI SI BLOCCHI E VADA IN LOOP, è OPPORTUNO CHE ESISTA UN MOOD CHE VIENE PASSATO ALLE CHIAMATE API.
 QUESTO MOOD è DETERMINATO DALLO STATO DELL'AI ED ANCHE DA UN NUMERO RANDOM CHE CAMBIA LENTAMENTE NEL TEMPO.
+
 
 
 So these routines are useful:
