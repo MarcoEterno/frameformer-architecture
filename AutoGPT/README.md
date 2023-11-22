@@ -56,13 +56,17 @@ While executing a task, the Agent will encounter new facts.
 The AI will challenge those facts using the epistemological method,
 which is a set of procedures the AI will use to challenge the facts.
 
+The base for the epistemological method is the scientific method. 
+to evaluate a proposition A according to it we should:
+
+
 
 terminal, user, external knowledge base.
 
 ## New Frameworks
 --when to create them and how to call them--
 
-## self reflection and stream of consciousness
+## Self reflection and stream of consciousness
 è IMPORTANTE CHE L'AI ABBIA INFORMAZIONI SU SE STESSA E LE IMMETTA NELLE RICHIESTE API AL LANGUAGE MODEL
 INOLTRE DEVE CONTINUAMENTE RIFLETTERE SUI PROPRI PENSIERI CHIEDENDOSI COSA PUò FARE PER AMPLIARE 
 LA PROPRIA CONOSCENZA DEL MONDO.
