@@ -46,10 +46,13 @@ Each task is a JSON object, which contains the following fields:
    3. **closed**: the task is closed, and cannot be executed
    4. **failed_with_current_available_instruments**: the task has failed,
    and cannot be executed
-5. **priority**: the priority of the task, which can be:
-   1. **high**: the task has high priority
-   2. **medium**: the task has medium priority
-   3. **low**: the task has low priority
+5. **value**: the value of the task, which can be:
+   1. **high**: the task can generate new frameworks, use arbitrarily 
+      high resource quality, call the user for help and 
+   2. **medium**: the task can use arbitrarily high resource quality, 
+      but can not call the user for help and create new frameworks
+   3. **low**: the task can only use low quality resources, and cannot 
+      call the user for help or create new frameworks
 6. **tasks_depending** on this task
 7. **tasks_required** in order to fulfill the task
 8. **tasks_and_thoughts_that_brought_to_it** still to decide if this is
@@ -67,6 +70,12 @@ Each thought is a JSON object, which contains the following fields:
    all the thoughts
 3. **content**: the thought itself in text format
 
+## Scheduler and resource management
+It is possible that given the variable amount of effort that 
+can be put in a task, a sophisticated system is needed to decide whether 
+to use some resources to complete a task, or to use them to create a 
+new framework or not.
+
 ## History of the agent
 Let's recap the main steps of the process:
 1) The Agent awakens, and starts to decompose the mission in tasks
@@ -83,7 +92,7 @@ Let's recap the main steps of the process:
     excessive decomposition.\
     e) every time the Agent encounters a new fact, it challenges it using 
     the epistemological method (explained below) 
-and if it is true it is added to world model.\
+    and if it is true it is added to world model.\
     f) when a solution to the task is proposed, the agent asks itself 
     if the solution is correct (if it is, the task is marked as completed)\
     g) the working memory will contain information about all the open and closed tasks.
@@ -100,7 +109,11 @@ which is a set of procedures the AI will use to challenge the facts.
 
 The base for the epistemological method is the scientific method. 
 to evaluate a proposition A according to it we should:
-
+1. **Derive predictions** from A, that should be falsifiable as 
+   easily as possible, and are not already known to be false.
+2. **Test the prediction** by an experiment. 
+   If the experiment does not confirm the prediction, the hypothesis is falsified.
+The overall process involves making conjectures (hypotheses), deriving predictions from them as logical consequences, and then carrying out experiments based on those predictions to determine whether the original conjecture was correct.
 
 
 terminal, user, external knowledge base.
@@ -145,6 +158,13 @@ Frameworks can contain three types of information:
 
 
 ## Self reflection and stream of consciousness
+
+-TODO: use some material on theory of mind and ask GPT4 if something is relevant to build a machine that thinks 
+
+A CHE PUNTO L'AI HA BISOGNO DI VERIFICARE LA SELF CONSISTENCY DELLE PROPRIE IDEE?
+COME MAI SERVE CHE L'IA OGNI TANTO RIFLETTA SULLO STREAM OF CONSCIOUSNESS E 
+SI CHIEDA COME AMPLIARE I PROPRI ORIZZONTI DI CONOSCENZA?
+
 è IMPORTANTE CHE L'AI ABBIA INFORMAZIONI SU SE STESSA E LE IMMETTA NELLE RICHIESTE API AL LANGUAGE MODEL
 INOLTRE DEVE CONTINUAMENTE RIFLETTERE SUI PROPRI PENSIERI CHIEDENDOSI COSA PUò FARE PER AMPLIARE 
 LA PROPRIA CONOSCENZA DEL MONDO.

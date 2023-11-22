@@ -3,10 +3,8 @@ import unittest
 import os
 from AutoGPT.apikey import API_KEY as apikey
 from langchain.llms import OpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain, SequentialChain
-from AutoGPT.routines import summarize_infos_relevant_to_task
-from AutoGPT.routines import give_answer
+from AutoGPT.Source.routines import summarize_infos_relevant_to_task
+from AutoGPT.Source.routines import give_answer
 
 
 def open_file_get_text(file_path):
