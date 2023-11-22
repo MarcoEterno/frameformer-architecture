@@ -37,7 +37,7 @@ in context memory management that uses RAG from the worldview + summarization to
 
 
 
-def summarization_of_infos_relevant_to_task(task, text_to_summarize, default_llm, context_length=8000):
+def summarize_infos_relevant_to_task(task, text_to_summarize, default_llm, context_length=8000):
     """Summarizes useful info"""
 
     """First step: counting the context length"""
@@ -57,7 +57,7 @@ def summarization_of_infos_relevant_to_task(task, text_to_summarize, default_llm
     num_summarizations_done = 1
     while count_tokens_of_string(summarization) > context_length and num_summarizations_done < 3:
         # first argue that the summarization is too long, we define a string, and pass it to the function.
-        summarization_of_infos_relevant_to_task(str(task) + "Also: YOU HAVE ALREADY SUMMARIZED THE INFO: BUT IT WAS TOO LONG: " + \
+        summarize_infos_relevant_to_task(str(task) + "Also: YOU HAVE ALREADY SUMMARIZED THE INFO: BUT IT WAS TOO LONG: " + \
                                                 count_tokens_of_string(str(summarization)) + " INSTEAD OF THE CONTEXT LENGTH " + str(context_length) + \
                                                 " NOW TRY TO SUMMARIZE IT IN LESS TOKENS!", text_to_summarize, default_llm, context_length)
         num_summarizations_done += 1
