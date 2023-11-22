@@ -30,15 +30,6 @@ The different types of memory used are:
 the relevant informations about those tasks, and the current thoughts of the AI.
 Tasks and thoughts are implemented using JSON objects.
 
-## History of the agent
-
-
-3. while doing that, the agent can further decompose the subtasks into 
-   sub-subtasks, and each time it discover something about the world it writes
-   it on the world model. The process by which the agent does that is a depth-first 
-   search, that prioritizes the most relevant subtasks, and prioritizes 
-   the most likely ways to fulfill them. a maximum depth is set, in order to avoid
-   excessive decomposition.
 
 ## History of the agent
 Let's recap the main steps of the process:
@@ -54,15 +45,31 @@ Let's recap the main steps of the process:
    and if it is true it is added to world model.\
        f) when a solution to the task is proposed, AGI asks itself if the solution is correct (if it is, the task is marked
         as completed)\
-       g) the working memory will contain informations about all the open and closed tasks.
+       g) the working memory will contain information about all the open and closed tasks.
 4) AGI stops when there are no tasks left.
 5) Last step is to paste together the tasks and their answers in the context window, and ask AGI to print to user the 
 answer to the mission.
 
 ## The epistemological method
+--EXPLAIN THE scientific method--
+While executing a task, the Agent will encounter new facts.
+The AI will challenge those facts using the epistemological method,
+which is a set of procedures the AI will use to challenge the facts.
 
 
-terminal
+terminal, user, external knowledge base.
+
+## New Frameworks
+--when to create them and how to call them--
+
+## self reflection and stream of consciousness
+è IMPORTANTE CHE L'AI ABBIA INFORMAZIONI SU SE STESSA E LE IMMETTA NELLE RICHIESTE API AL LANGUAGE MODEL
+INOLTRE DEVE CONTINUAMENTE RIFLETTERE SUI PROPRI PENSIERI CHIEDENDOSI COSA PUò FARE PER AMPLIARE 
+LA PROPRIA CONOSCENZA DEL MONDO.
+
+PER EVITARE CHE L'AI SI BLOCCHI E VADA IN LOOP, è OPPORTUNO CHE ESISTA UN MOOD CHE VIENE PASSATO ALLE CHIAMATE API.
+QUESTO MOOD è DETERMINATO DALLO STATO DELL'AI ED ANCHE DA UN NUMERO RANDOM CHE CAMBIA LENTAMENTE NEL TEMPO.
+
 
 So these routines are useful:
 1. **decompose**: decomposes a task into subtasks, and adds them to the working memory.
