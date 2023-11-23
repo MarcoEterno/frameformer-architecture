@@ -181,19 +181,12 @@ is relevant to build a machine that thinks
 The agent will continuously reflect on its own thoughts and world
 model, in order to expand the knowledge of the world and of itself.
 
+The Agent will have at all times information about itself, its
+thoughts and its mood. This information will be passed to the API calls
+to the language model, in order to make the model aware of itself.
 
-
-
-
-A CHE PUNTO L'AI HA BISOGNO DI VERIFICARE LA SELF CONSISTENCY DELLE PROPRIE IDEE?
-COME MAI SERVE CHE L'IA OGNI TANTO RIFLETTA SULLO STREAM OF CONSCIOUSNESS E 
-SI CHIEDA COME AMPLIARE I PROPRI ORIZZONTI DI CONOSCENZA?
-
-è IMPORTANTE CHE L'AI ABBIA INFORMAZIONI SU SE STESSA E LE IMMETTA NELLE RICHIESTE API AL LANGUAGE MODEL
-INOLTRE DEVE CONTINUAMENTE RIFLETTERE SUI PROPRI PENSIERI CHIEDENDOSI COSA PUò FARE PER AMPLIARE 
-LA PROPRIA CONOSCENZA DEL MONDO.
-
-PER EVITARE CHE L'AI SI BLOCCHI E VADA IN LOOP, è OPPORTUNO CHE ESISTA UN MOOD CHE VIENE PASSATO ALLE CHIAMATE API.
-QUESTO MOOD è DETERMINATO DALLO STATO DELL'AI ED ANCHE DA UN NUMERO RANDOM CHE CAMBIA LENTAMENTE NEL TEMPO.
-
+The presence of mood, which is determined by agent thoughts and a random
+number that changes slowly in time, is important in order to avoid 
+the agent to go in a loop (same llm calls but different moods will
+result in different outputs)
 
