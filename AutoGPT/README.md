@@ -70,15 +70,6 @@ Each thought is a JSON object, which contains the following fields:
    all the thoughts
 3. **content**: the thought itself in text format
 
-## Task scheduler and resource management
-It is possible that given the variable amount of effort that 
-can be put in a task, a sophisticated system is needed to decide whether 
-to use some resources to complete a task, or to use them to create a 
-new framework or not.
-
-WOULD BE NICE TO SET A BOOL VARIABLE USER_AWAY, IN ORDER TO 
-FORCE THE MODEL TO DO THINGHS ON HIS OWN.
-
 
 ## History of the agent
 Let's recap the main steps of the process:
@@ -150,6 +141,15 @@ The agent will try to complete a single task using this strategy:
 6. **create_framework**: if even after the high resources mode the solution 
    is still not convincing, the agent will create a new framework to solve the task.
 
+## Task scheduler and resource management
+It is possible that given the variable amount of effort that 
+can be put in a task, a sophisticated system is needed to decide whether 
+to use some resources to complete a task, or to use them to create a 
+new framework or not.
+
+WOULD BE NICE TO SET A BOOL VARIABLE USER_AWAY, IN ORDER TO 
+FORCE THE MODEL TO DO THINGS ON HIS OWN.
+
 ## New Frameworks
 --when to create them and how to call them--
 After having solved a task, the agent evaluates the solution. 
@@ -175,7 +175,15 @@ Frameworks can contain three types of information:
 
 ## Self reflection and stream of consciousness
 
--TODO: use some material on theory of mind and ask GPT4 if something is relevant to build a machine that thinks 
+-TODO: use some material on theory of mind and ask GPT4 if something
+is relevant to build a machine that thinks 
+
+The agent will continuously reflect on its own thoughts and world
+model, in order to expand the knowledge of the world and of itself.
+
+
+
+
 
 A CHE PUNTO L'AI HA BISOGNO DI VERIFICARE LA SELF CONSISTENCY DELLE PROPRIE IDEE?
 COME MAI SERVE CHE L'IA OGNI TANTO RIFLETTA SULLO STREAM OF CONSCIOUSNESS E 
