@@ -1,15 +1,11 @@
-import os
 from apikey import API_KEY as apikey
-from routines import *  # to substitute with specific routines we are using
 from prompts import QA_format
 from utils import count_calls
-from working_memory import WorkingMemory
+from AutoGPT.memory.working_memory import WorkingMemory
 
 import os
 import streamlit as st
 from langchain.llms import OpenAI
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain, SequentialChain
 
 os.environ["OPENAI_API_KEY"] = apikey
 
