@@ -37,8 +37,10 @@ def execute_program_routine_python(script_name: str) -> Tuple[str, str]:
 
         return result.stdout, result.stderr
 
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as e:
         print("Script execution exceeded the time limit.")
+        raise e  # Re-raise the exception
 
     except Exception as e:
         print(f"An error occurred: {e}")
+        raise e  # Re-raise the exception
