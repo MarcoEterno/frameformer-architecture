@@ -1,11 +1,22 @@
 import subprocess
 import shlex
 from typing import Tuple
+import os
 
 
-def execute_program_routine(script_name: str) -> Tuple[str, str]:
+def execute_program_routine_python(script_name: str) -> Tuple[str, str]:
+    """
+    Executes the program routine of the framework.
+
+    Args:
+        script_name: Name of the Python script to execute.
+
+    Returns:
+        Tuple[str, str]: Output and error of the program routine.
+    """
     # Prepare the command to run the Python script
-    script_path = f"AutoGPT/sandbox/{script_name}"
+    # script_path = f"AutoGPT/sandbox/programs/{script_name}"
+    script_path = os.path.join(os.path.join(os.getcwd(), 'programs'), script_name)
     command = f"python3 {script_path}"
 
     # Use shlex to safely split the command string

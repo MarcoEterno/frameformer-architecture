@@ -1,11 +1,12 @@
 import unittest
 
 import os
-from AutoGPT.apikey import API_KEY as apikey
+from AutoGPT.source.root.apikey import API_KEY as apikey
 from langchain.llms import OpenAI
-from AutoGPT.agent.routines import summarize_infos_relevant_to_task
-from AutoGPT.agent.routines import give_answer
+from AutoGPT.source.agent.routines import summarize_infos_relevant_to_task
+from AutoGPT.source.agent.routines import give_answer
 
+os.environ["OPENAI_API_KEY"] = apikey
 
 def open_file_get_text(file_path):
     try:
@@ -22,11 +23,16 @@ def ask_user_for_confirmation(answer):
 
 class Test_summarization_of_infos_relevant_to_task(unittest.TestCase):
     def test_of_summarization(self):
-        os.environ["OPENAI_API_KEY"] = apikey
+        """
+        Test of the summarization of infos relevant to a task.
+        It only runs if executed with the -s flag, in order to capture user confirmation
+        """
         default_llm = OpenAI(temperature=0.9, model="gpt-3.5-turbo-instruct")
         
         task = "Which creatures and which men do Dante see in the wilds?"
-        divine_comedy_chapter_one = open_file_get_text("AutoGPT/test/divine_comedy_chapter_one.txt")
+
+        file_path = os.path.join(os.path.dirname(__file__), "divine_comedy_chapter_one.txt")
+        divine_comedy_chapter_one = open_file_get_text(file_path)
         relevant_info = summarize_infos_relevant_to_task(task, divine_comedy_chapter_one, default_llm, 800)
         answer = give_answer(task, relevant_info, default_llm, 8000)
 

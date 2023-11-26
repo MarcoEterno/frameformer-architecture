@@ -1,7 +1,7 @@
 from apikey import API_KEY as apikey
 from prompts import QA_format
 from utils import count_calls
-from AutoGPT.memory.working_memory import WorkingMemory
+from AutoGPT.source.memory.working_memory import WorkingMemory
 
 import os
 import streamlit as st
