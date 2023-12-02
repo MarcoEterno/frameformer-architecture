@@ -1,5 +1,8 @@
 import time
 
+def return_number_of_calls():
+    return_number_of_calls.calls += 1
+    return return_number_of_calls.calls
 
 # Decorator: counts the number of calls to the LLM, and stops the calls if LLM is called more than 500 times in a single execution.
 def count_calls(func):
@@ -24,3 +27,7 @@ def timer(func):
     return wrapper
 
 
+#generates unique ids for objects based on the number this function is called.
+def generate_id():
+    generate_id.calls += 1
+    return generate_id.calls

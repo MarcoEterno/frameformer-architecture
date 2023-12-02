@@ -2,6 +2,7 @@ from apikey import API_KEY as apikey
 from prompts import QA_format
 from utils import count_calls
 from AutoGPT.source.memory.working_memory import WorkingMemory
+import openai
 
 import os
 import streamlit as st
@@ -12,10 +13,10 @@ os.environ["OPENAI_API_KEY"] = apikey
 
 @count_calls
 def OpenAI_count_calls(*args, **kwargs):
-    return OpenAI(*args, **kwargs)
+    return openai.ChatCompletion.create(*args, **kwargs)
 
 
-default_llm = OpenAI_count_calls(temperature=0.9, model="gpt-3.5-turbo-instruct")
+default_llm = OpenAI_count_calls(temperature=0.9, model="gpt-4-1106-preview")
 
 # App framework
 st.title("AutoGPT")
