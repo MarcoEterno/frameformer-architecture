@@ -8,8 +8,16 @@ from AutoGPT.source.sandbox.sandbox import execute_program_routine_python
 class TestExecuteProgramRoutinePython(unittest.TestCase):
 
     def setUp(self):
-        self.script_name = "test_script.py"
+        self.script_name = "tester_program.py"
         self.script_path = os.path.join(os.getcwd(), 'programs', self.script_name)
+
+
+    def test_execute_successful(self):
+        # Directly execute the script and test for a successful outcome
+        output, error = execute_program_routine_python(self.script_name)
+        # Assuming the script prints "Success" on successful execution
+        self.assertEqual(output, "Hello World!\n")
+        self.assertEqual(error, "")
 
     @patch('subprocess.run')
     def test_execute_successful(self, mock_run):

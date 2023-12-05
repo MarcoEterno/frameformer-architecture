@@ -25,7 +25,7 @@ def execute_program_routine_python(script_name: str) -> Tuple[str, str]:
     try:
         # Execute the script in a new process
         # stdout and stderr capture the output and errors
-        result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=30)
+        result = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=5)
 
         # Check if the script ran successfully
         if result.returncode == 0:

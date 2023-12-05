@@ -12,5 +12,4 @@ from ..utils.function_utils import count_calls, return_number_of_calls
 
 @count_calls
 def OpenAI_count_calls(*args, **kwargs):
-    return OpenAI.ChatCompletion.create(*args, **kwargs)
-
+    return print(*args, **kwargs)
