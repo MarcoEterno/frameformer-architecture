@@ -1,3 +1,5 @@
+#file to refactor entirely, written just to take these things in mind
+
 mission = "You are an Artificial intelligence tasked " + \
           "with building a knowledge about the world. "
 

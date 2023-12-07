@@ -1,15 +1,10 @@
 from apikey import API_KEY as apikey
-from utils import count_calls
+from  AutoGPT.source.llm.llm_functions import OpenAI_count_calls
+
 
 from collections import deque
 import os
 from langchain.llms import OpenAI
-
-os.environ["OPENAI_API_KEY"] = apikey
-
-@count_calls
-def OpenAI_count_calls(*args,**kwargs):
-    return OpenAI(*args,**kwargs)
 
 default_llm = OpenAI_count_calls(temperature=0.9, model="gpt-3.5-turbo-instruct")
 

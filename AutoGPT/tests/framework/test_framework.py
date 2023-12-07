@@ -14,7 +14,7 @@ class TestFramework(unittest.TestCase):
         # mock_execute.return_value = ("Hello World", "")
 
         # Create a Framework instance and call test_program_routine
-        output, error = self.framework.test_program_routine("print('Hello World')")
+        output, error = self.framework.execute_program_routine("print('Hello World')")
 
         # Asserts
         self.assertEqual(output, "Hello World")
@@ -46,7 +46,7 @@ class TestFramework(unittest.TestCase):
         self.framework.update_information(name="test", description="test", text_routine="test", program_routine="test",
                                           program_instructions="test")
         self.assertEqual(self.framework.name, "test")
-        self.assertEqual(self.framework.description, "test")
+        self.assertEqual(self.framework.objective, "test")
         self.assertEqual(self.framework.text_routine, "test")
         self.assertEqual(self.framework.program_routine, "test")
         self.assertEqual(self.framework.program_instructions, "test")
