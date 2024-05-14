@@ -1,6 +1,6 @@
 # Thought implementation in LLMs: the Frameformer
-Disclaimer: this project is intended as a proof of concept for the frameformer architecture, and not as a working code implementation.
-Nonetheless, the code goes into quite a lot of detail, in order to address any doubt that might arise in the implementation.
+Disclaimer: *this project is intended as a proof of concept for the frameformer architecture, and not as a working code implementation.
+Nonetheless, the code goes into quite a lot of detail, in order to address any doubt that might arise in the implementation.*
 
 
 While LLMs are advancing towards human level intelligence in many fields,
