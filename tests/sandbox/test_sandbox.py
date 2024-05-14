@@ -2,7 +2,7 @@ import unittest
 import subprocess
 from unittest.mock import patch, MagicMock
 import os
-from AutoGPT.source.sandbox.sandbox import execute_program_routine_python
+from source.sandbox.sandbox import execute_program_routine_python
 
 
 class TestExecuteProgramRoutinePython(unittest.TestCase):
