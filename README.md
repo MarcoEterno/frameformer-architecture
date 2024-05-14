@@ -1,4 +1,4 @@
-# Thought implementation in LLMs
+# Thought implementation in LLMs: the Frameformer
 While LLMs are advancing towards human level intelligence in many fields,
 the thought processes that characterize a human are far from being 
 implemented in the standard full stack implementations of 
@@ -10,6 +10,13 @@ through the implementation of N distinct contributions:
 2. A routine to access the long term memory and retrieve only relevant content
 3. An organized scientific process through which the world model is updated
 
+The architecture we are about to describe, is based on independent working blocks
+each one with a specific function, that can be used in a modular way.
+
+The blocks are called frameworks, so we decided to call the whole architecture "The Frameformer".
+Below is an illustrative diagram to show the frameworks and their interactions.
+
+![img.png](frameformer.png)
 
 ## Memory implementation
 Different types and architectures of memory are implemented.  
@@ -147,11 +154,7 @@ can be put in a task, a sophisticated system is needed to decide whether
 to use some resources to complete a task, or to use them to create a 
 new framework or not.
 
-WOULD BE NICE TO SET A BOOL VARIABLE USER_AWAY, IN ORDER TO 
-FORCE THE MODEL TO DO THINGS ON HIS OWN.
-
 ## New Frameworks
---when to create them and how to call them--
 After having solved a task, the agent evaluates the solution. 
 If the solution is convincing, the task can be marked as completed.
 If the solution is not convincing, the agent will redo the task in high 
@@ -175,8 +178,7 @@ Frameworks can contain three types of information:
 
 ## Self reflection and stream of consciousness
 
--TODO: use some material on theory of mind and ask GPT4 if something
-is relevant to build a machine that thinks 
+-Note: This section should be expanded by taking inspiration from the theory of mind
 
 The agent will continuously reflect on its own thoughts and world
 model, in order to expand the knowledge of the world and of itself.
